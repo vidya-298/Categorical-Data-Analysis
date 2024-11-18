@@ -1,3 +1,2 @@
-# Categorical-Data-Analysis
-## Food Preferences and Consumption Patterns
+# Food Preferences and Consumption Patterns
 This study aims to explore the intricate relationships between dietary preferences and various influencingfactors such as gender, health consciousness, meal preferences, and eating habits. By employing categoricaldata analysis techniques, the research seeks to uncover the underlying associations that drive food choices.Specifically, the study will analyze how gender affects dietary preferences, assess the impact of health con-sciousness on food choices, examine the relationship between meal preferences and eating out frequency,and develop predictive models to forecast dietary preferences. Additionally, advanced statistical methods,including multinomial logistic regression and log-linear modeling, will be used to delve into more complexrelationships among multiple categorical variables related to food consumption.
