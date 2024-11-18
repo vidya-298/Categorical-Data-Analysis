@@ -1,0 +1,727 @@
+---
+title: "Food Preferences and Consumption Patterns"
+author: "Vidya Sri L"
+date: "2024-11-18"
+output: pdf_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+## Introduction
+
+Dietary preferences and food consumption patterns are key aspects of
+human behavior that have significant implications for public health,
+nutrition, and the food industry. These preferences are shaped by a
+complex interplay of demographic factors, health consciousness, cultural
+influences, and individual lifestyle choices. Understanding these
+patterns is crucial for designing effective public health interventions,
+developing targeted marketing strategies, and addressing the diverse
+needs of consumers.
+
+This study aims to explore the intricate relationships between dietary
+preferences and various influencing factors such as gender, health
+consciousness, meal preferences, and eating habits. By employing
+categorical data analysis techniques, the research seeks to uncover the
+underlying associations that drive food choices. Specifically, the study
+will analyze how gender affects dietary preferences, assess the impact
+of health consciousness on food choices, examine the relationship
+between meal preferences and eating out frequency, and develop
+predictive models to forecast dietary preferences. Additionally,
+advanced statistical methods, including multinomial logistic regression
+and log-linear modeling, will be used to delve into more complex
+relationships among multiple categorical variables related to food
+consumption.
+
+## Objectives
+
+1.  Analyze Dietary Preferences: Examine the association between gender
+    and dietary preferences, using odds ratio and relative risk to
+    quantify differences.
+2.  Assess Health Consciousness Impact: Determine how health
+    consciousness influences food preferences through Chi-Square tests
+    and visualizations.
+3.  Evaluate Meal Preferences: Explore the link between meal preferences
+    and frequency of eating out, applying likelihood ratio tests and
+    heatmaps.
+4.  Predict Dietary Preferences: Fit and evaluate logistic regression
+    models to predict dietary preferences based on various predictors.
+5.  Apply Multinomial Logistic Regression: Investigate shopping
+    behaviors related to cooking frequency using multinomial logistic
+    regression.
+6.  Fit Log-Linear Model: Test the adequacy of the log-linear model in
+    representing relationships among categorical variables related to
+    food preferences.
+
+## Formulation of Problem
+
+The study aims to explore and analyze dietary preferences and food
+consumption patterns using categorical data analysis. The focus is on
+understanding how various factors such as gender, health consciousness,
+meal preferences, and eating habits influence dietary choices among
+respondents. The key issues include:
+
+1.  Dietary Preferences by Gender: Assessing how gender affects
+    preferences for vegetarian versus non-vegetarian diets.
+2.  Health Consciousness and Food Choices: Investigating the
+    relationship between health consciousness levels and preferred food
+    types.
+3.  Meal Preferences and Eating Out Frequency: Evaluating whether meal
+    preferences are associated with how often individuals eat out.
+4.  Dietary Preferences Prediction: Developing models to predict dietary
+    preferences based on demo- graphic and behavioral factors.
+5.  Multinomial and Log-Linear Modeling: Employing advanced statistical
+    techniques to understand the complex relationships among multiple
+    categorical variables related to food consumption.
+
+## Questionnaire
+
+The following questionnaire was designed to collect comprehensive data
+on respondents’ food preferences, eating habits, and spending patterns.
+It includes various types of questions to categorize responses and
+assess key aspects of food consumption.
+
+1.  What is your age group?
+
+    • Under 18
+
+    • 18-28
+
+    • 29-38
+
+    • 39-48
+
+    • 49 and above
+
+2.  What is your gender?
+
+    • Male
+
+    • Female
+
+3.  What is your dietary preference?
+
+    • Vegetarian
+
+    • Non-Vegetarian
+
+4.  What is your favorite type of cuisine?
+
+    • Italian
+
+    • Chinese
+
+    • North Indian
+
+    • South Indian
+
+5.  How often do you eat out?
+
+    • Daily
+
+    • Weekly
+
+    • Monthly
+
+    • Occasionally
+
+6.  Which meal of the day do you prefer the most?
+
+    • Breakfast
+
+    • Lunch
+
+    • Dinner
+
+    • Snacks
+
+7.  How important is health to you when choosing food?
+
+    • Important
+
+    • Neutral
+
+    • Does not care
+
+8.  What is your preferred type of food?
+
+    • Fast Food
+
+    • Home-Cooked
+
+    • Organic
+
+    • Street Food
+
+9.  How much do you typically spend on food per week?
+
+    • Under 200
+
+    • 200-500
+
+    • 600-1000
+
+    • 1000 and above
+
+10. Where do you primarily shop for food?
+
+    • Supermarket
+
+    • Local Market
+
+    • Organic Store
+
+    • Online
+
+11. How often do you cook meals at home?
+
+    • Daily
+
+    • Several times a week
+
+    • Weekly
+
+    • Occasionally
+
+12. How often do you try new foods or cuisines?
+
+    • Very Often
+
+    • Often
+
+    • Occasionally
+
+    • Never
+
+## Data Collection
+
+### Description
+
+Data was collected using an online survey tool, distributed among
+participants from various age groups. The survey automatically recorded
+respondents’ email addresses to ensure authenticity.
+
+### Sample Size
+
+A total of 131 respondents participated in the survey, providing diverse
+insights into their food preferences and consumption habits.
+
+### Methodology
+
+The study utilizes a structured questionnaire to collect data on
+respondents’ food preferences, eating habits, and spending patterns. The
+survey was distributed online, targeting a diverse sample of
+participants from various age groups, resulting in a total of 131
+responses. The dataset was pre-processed to remove unnecessary columns,
+and various statistical analyses were performed to meet the study’s
+objectives.
+
+• **Contingency Tables and Tests:** We created contingency tables to
+explore the relationships between categorical variables, such as gender
+and dietary preferences. The odds ratio and relative risk were
+calculated to quantify differences, while Chi-Square tests were employed
+to assess the significance of associations, such as between health
+consciousness and preferred food types.
+
+• **Visualization:** Heatmaps were generated to visually represent the
+relationships between variables, providing a clearer understanding of
+how different factors, such as health consciousness, influence food
+preferences.
+
+• **Logistic Regression:** A logistic regression model was fitted to
+predict dietary preferences based on selected predictors, such as gender
+and favorite cuisine. Model selection techniques, including forward
+selection and backward elimination, were used to identify the most
+important predictors.
+
+• **Multinomial Logistic Regression:** This analysis was used to
+investigate shopping behaviors related to cooking frequency, providing
+insights into how often people shop at different places based on how
+frequently they cook meals at home.
+
+• **Log-Linear Modeling:** A log-linear model was fitted to test the
+adequacy of representing relationships among categorical variables
+related to food preferences, allowing us to understand the interactions
+between multiple factors.
+
+## Data Import and Initial Processing
+
+```{r}
+library(readxl)
+#Load data
+library(readxl)
+data<- read_excel("/Users/apple/Downloads/CDA_Project (Responses).xlsx")
+data <- data[,-c(1, 2)]
+# Print first few rows of data
+head(data)
+```
+
+## Analysis
+
+```{r}
+# Summary statistics for numerical variables
+summary(data)
+
+# Frequencies of categorical variables
+table(data$age)
+table(data$gender)
+table(data$diet_pref)
+table(data$fav_cuisine)
+table(data$eat_out_freq)
+table(data$meal_pref)
+table(data$health_conscious)
+table(data$pref_typefood)
+table(data$spend_week)
+table(data$shop_place)
+table(data$cook_freq)
+table(data$new_food)
+```
+
+**Demographics:** 69 females and 62 males. Majority are non-vegetarian
+(94).
+
+**Cuisine Preferences:** South Indian is the most popular cuisine (101).
+Other favorites include North Indian (17), Italian (6), and Chinese (7).
+
+**Meal Preferences:** Most preferred meals are dinner (51) and lunch
+(49). Fewer respondents prefer breakfast (22) and snacks (9).
+
+**Eating Out Frequency:** Weekly (63) is the most common frequency.
+Other frequencies: Occasionally (26), Daily (27), and Monthly (15).
+
+**Food Preferences:** Home-cooked food is highly preferred (92). Less
+preference for fast food (16) and street food (11). Organic food has a
+moderate preference (12).
+
+**Shopping Habits:** Local Market (55) is the most popular shopping
+place. Followed by Supermarket (45), Online (24), and Organic Store (7).
+
+**Food Importance:** Most consider food important (73). A smaller number
+are indifferent (10).
+
+### Analysis of Gender and Dietary preferences:
+
+```{r}
+# Create contingency table with gender as the response variable
+contingency_table_gen <- table(data$diet_pref, data$gender)
+
+# Display the contingency table
+print(contingency_table_gen)
+```
+
+The contingency table reveals the following dietary preferences: •
+Females: 42 prefer non-vegetarian, and 27 prefer vegetarian. • Males: 52
+prefer non-vegetarian, and 10 prefer vegetarian.
+
+```{r}
+# Define the values from the contingency table
+a <- 42 # Females preferring non-vegetarian
+b <- 27 # Females preferring vegetarian
+c <- 52 # Males preferring non-vegetarian
+d <- 10 # Males preferring vegetarian
+# Calculate Odds Ratio
+odds_ratio <- (a / b) / (c / d)
+print(paste("Odds Ratio:", odds_ratio))
+```
+
+The odds ratio of approximately 0.299 indicates that the odds of females
+preferring non-vegetarian food compared to vegetarian food are about 30%
+of the odds for males. This suggests that females are significantly less
+likely to prefer non-vegetarian food compared to males.
+
+```{r}
+# Calculate Relative Risk
+risk_female_non_veg <- a / (a + b)
+risk_male_non_veg <- c / (c + d)
+relative_risk <- risk_female_non_veg / risk_male_non_veg
+print(paste("Relative Risk:", relative_risk))
+```
+
+The relative risk of approximately 0.727 further supports this, showing
+that females are about 73% as likely as males to prefer non-vegetarian
+food.
+
+### Analysis of Health consciousness and Preferred foodtype
+
+```{r}
+# Create a contingency table with health_conscious and pref_typefood
+contingency_table_hf<- table(data$health_conscious, data$pref_typefood)
+
+# Display the contingency table
+print(contingency_table_hf)
+```
+
+```{r}
+# Perform the Chi-Square test
+chi_square_test <- chisq.test(contingency_table_hf)
+
+# Display the results
+print(chi_square_test)
+
+# Critical value for alpha = 0.05 and df = 6
+critical_value <- qchisq(0.95, df = 6)
+print(critical_value)
+```
+
+The Chi-Square test results for the contingency table with
+health_conscious and pref_typefood show a test statistic of 13.839 with
+6 degrees of freedom, and a p-value of 0.03149. This p-value is below
+the typical alpha level of 0.05, indicating that there is a
+statistically significant association between health consciousness and
+preferred food type.The critical value for the Chi-Square distribution
+with 6 degrees of freedom at a 0.05 significance level is approximately
+12.592. Since the test statistic 13.839 exceeds this critical value, we
+reject the null hypothesis.
+
+In other words, the differences observed in the frequency of preferred
+food types across different levels of health consciousness are unlikely
+to be due to chance, suggesting a meaningful relationship between health
+consciousness and food preference.
+
+#### Visualisation
+
+```{r}
+# Convert the contingency table to a data frame
+contingency_df <- as.data.frame(contingency_table_hf)
+
+# Load ggplot2 package
+library(ggplot2)
+
+# Create a heatmap with a color gradient from light to dark
+ggplot(contingency_df, aes(x = Var2, y = Var1, fill = Freq)) +
+geom_tile() +
+scale_fill_gradient(low = "lightblue", high = "darkblue") +
+labs(title = "Heatmap of Health Consciousness and Preferred Food Type",
+x = "Preferred Food Type",
+y = "Health Consciousness",
+fill = "Frequency") +
+theme_minimal()
+```
+
+The heatmap visually supports this finding by showing how the frequency
+of each food preference varies with health consciousness, with some
+categories (like “Important” in “Home-Cooked”) being more pronounced
+than others.
+
+### Analysis of Meal preference and eating outside frequently
+
+```{r}
+#Create contingency table
+table = table(data$meal_pref, data$eat_out_freq)
+table
+
+#Likelihood Ratio Test
+library(DescTools)
+
+likelihood_ratio_test <- GTest(table)
+print(likelihood_ratio_test)
+
+# Calculate the degrees of freedom
+df <- (nrow(table)- 1) * (ncol(table)- 1)
+# Calculate the chi square tabulated value
+p_value <- qchisq(0.95, df)
+print(paste("Chi square tabulated value ", p_value))
+```
+
+Here, the likelihood ratio test (G-test), is used to determine whether
+there is a significant association between meal preference and frequency
+of eating out. The p-value is greater than the typical significance
+level of 0.05, and Calculate G is less than table value, therefore we
+fail to reject the null hypothesis which suggests that there is no
+significant association between meal preference and frequency of eating
+out at the 5% level.
+
+#### Visualisation
+
+```{r}
+# Convert the contingency table to a data frame
+table_df <- as.data.frame(table)
+# Rename the columns
+colnames(table_df) <- c("meal_pref", "eat_out_freq", "freq")
+# Create a heatmap using ggplot2
+ggplot(table_df, aes(x = eat_out_freq, y = meal_pref, fill = freq)) +
+geom_tile() +
+scale_fill_gradient(low = "white", high = "deeppink") +
+labs(x = "Eat Out Frequency", y = "Meal Preference", fill = "Frequency") +
+theme_classic()
+```
+
+The heatmap shows that “Lunch” is the most common meal for eating out,
+especially on a weekly basis, as indicated by the darkest pink shade.
+“Dinner” is also popular, particularly on an occasional and weekly
+basis. Eating out daily is less common across all meal types. “Snacks”
+and “Breakfast” have the lowest frequencies, with lighter shades across
+all eating-out frequencies. Overall, weekly dining out, especially for
+lunch, is the most frequent behavior.
+
+### Logistic Regression and Model Evaluation on Dietary Preferences
+
+#### Data Transformation and Initial Model Fitting
+
+```{r}
+data$diet_pref <- ifelse(data$diet_pref== "Vegetarian", 1, 0)
+model=lm(data$diet_pref~.,data=data)
+
+print(data)
+```
+
+The diet_pref column is converted into a binary variable where
+“Vegetarian” is coded as 1 and others as 0. A linear model is fitted
+with diet_pref as the response variable and all other variables as
+predictors.
+
+#### Test for Normality
+
+**Shapiro-Wilk Test** • H0: The residuals are normally distributed • H1:
+The residuals are not normally distributed.
+
+```{r}
+r=rstudent(model)
+shapiro.test(r)
+```
+
+Here p-value 6.01e-05 \<0.05,we reject ho.Hence the residuals are not
+normally distributed.
+
+### Model Selection
+
+#### Forward Selection
+
+Forward selection helps in identifying the most important predictors for
+diet_pref by incrementally adding variables that improve model
+performance.
+
+```{r}
+fitstart=lm(data$diet_pref~1,data = data)
+model <- lm(data$diet_pref~., data =data)
+fwd=step(fitstart,direction = 'forward',scope = formula(model))
+```
+
+Gender and favourite cuisine are the most important predictors for
+diet_pref.
+
+### Backward Elimination
+
+Backward elimination provides another method to refine the model by
+removing predictors that do not contribute meaningfully to the
+prediction of diet_pref.
+
+```{r}
+bwd=step(model,direction = "backward")
+```
+
+Gender and favourite cuisine are the most important predictors for
+diet_pref selected through backward selection.
+
+### Logistic Regression Model
+
+```{r}
+glm=glm(data$diet_pref~ gender + fav_cuisine,data=data,family = binomial)
+summary(glm)
+```
+
+A generalized linear model (GLM) is fitted using gender and fav_cuisine
+as predictors, with diet_pref as the binary outcome.The logistic
+regression analysis shows that gender is a significant predictor of
+dietary preference. Specifically, males are significantly less likely to
+be vegetarian compared to females (Estimate = -1.20226, p = 0.00757).
+The decrease from 155.95 (null deviance) to 138.44 (residual deviance)
+suggests that the model with gender and fav_cuisine improves the fit
+compared to a model with no predictors
+
+### Model Evaluation
+
+```{r}
+# Load necessary libraries
+library(caret) # For confusionMatrix and metrics
+library(pROC) # For ROC curve and AUC
+
+# Predict probabilities
+pred_probs <- predict(glm, data, type = "response")
+# Convert probabilities to binary predictions
+pred <- ifelse(pred_probs > 0.5, 1, 0)
+# Calculate confusion matrix
+conf_matrix <- confusionMatrix(as.factor(pred), as.factor(data$diet_pref))
+# Extract accuracy, sensitivity, specificity
+accuracy <- conf_matrix$overall['Accuracy']
+sensitivity <- conf_matrix$byClass['Sensitivity']
+specificity <- conf_matrix$byClass['Specificity']
+# Print accuracy, sensitivity, and specificity
+print(paste("Accuracy:", round(accuracy, 4)))
+print(paste("Sensitivity:", round(sensitivity, 4)))
+print(paste("Specificity:", round(specificity, 4)))
+
+# Calculate F1 Score
+precision <- conf_matrix$byClass['Precision']
+recall <- sensitivity
+f1_score <- 2 * (precision * recall) / (precision + recall)
+print(paste("F1 Score:", round(f1_score, 4)))
+
+# Print AUC value
+roc_curve <- roc(data$diet_pref, pred_probs)
+
+auc_value <- auc(roc_curve)
+print(paste("AUC:", round(auc_value, 4)))
+```
+
+The model shows good accuracy (77.1%) and is excellent at identifying
+vegetarians (sensitivity: 95.74%). However, it struggles to correctly
+identify non-vegetarians (specificity: 29.73%). The F1 Score (0.8571)
+reflects a good balance between precision and recall, while the AUC
+(0.6998) indicates moderate overall discrimination ability.
+
+### ROC curve
+
+```{r}
+# Plot ROC curve
+roc_curve <- roc(data$diet_pref, pred_probs)
+
+auc_value <- auc(roc_curve)
+plot(roc_curve, main = "ROC Curve")
+abline(a = 0, b = 1, lty = 2, col = "red") # Add a diagonal line
+```
+
+The ROC curve shows that the model has moderate performance. The curve
+is close to the diagonal, indicating that the model’s ability to
+distinguish between classes is not strong. This suggests the model is
+only somewhat better than random guessing, with room for improvement.
+
+The model is very effective at detecting vegetarians but struggles with
+accurately identifying non-vegetarians. The high sensitivity and F1
+score suggest it’s well-tuned for situations where identifying
+vegetarians is more critical, but the low specificity indicates it may
+produce many false positives for vegetarians.
+
+#### Fitting of Multinomial Logistic Regression:
+
+```{r}
+table1 = table(data$shop_place, data$cook_freq)
+table1
+
+# Load the necessary libraries
+library(nnet)
+# Convert the shop_place and cook_freq variables to factors
+data$shop_place <- factor(data$shop_place)
+data$cook_freq <- factor(data$cook_freq)
+
+# Perform multinomial logistic regression analysis
+multinom_shop_place <- multinom(shop_place~ cook_freq, data = data)
+
+# Summarize the results
+summary(multinom_shop_place)
+
+# Extract the coefficients for each category
+coef_shop_place <- coef(multinom_shop_place)
+# Calculate the odds ratios for each category
+or_shop_place <- exp(coef_shop_place)
+print("Odds Ratios for shop_place:")
+
+print(or_shop_place)
+```
+
+The multinomial logistic regression shows that people who cook more
+frequently (especially weekly) are much more likely to shop at
+supermarkets and organic stores. Those who cook less frequently, like
+occasionally or several times a week, are more inclined to shop online.
+The odds ratios indicate a strong preference for supermarkets and
+organic stores among regular cooks, with the highest likelihood seen in
+weekly cooks.
+
+### Fitting of Log-Linear Model:
+
+Null Hypothesis (H0): The log-linear model accurately represents the
+relationships among the categorical variables in the data. In other
+words, the model fits the data well and there are no significant
+deviations from what is expected.
+
+Alternative Hypothesis (H1): The log-linear model does not accurately
+represent the relationships among the categorical variables.
+
+```{r}
+library(MASS)
+# Create a contingency table and set dimension names
+contingency_table <- table(data$age, data$pref_typefood, data$spend_week, data$new_food)
+dimnames(contingency_table) <- list(
+age = levels(data$age),
+pref_typefood = levels(data$pref_typefood),
+spend_week = levels(data$spend_week),
+new_food = levels(data$new_food)
+)
+# Fit the log-linear model using loglm
+loglin_model <- loglm(~ age + pref_typefood + spend_week + new_food, data = contingency_table)
+loglin_model
+```
+
+The log-linear model fit well according to the statistics. The
+Likelihood Ratio Chi-Square value is 138.39 with a p-value close to
+1(\>0.05), indicating a good model fit. The Pearson Chi-Square value is
+274.76 with a p-value of 0.079 (\>0.05), suggesting no significant
+deviation between observed and expected frequencies. Overall, these
+results imply that the log-linear model adequately represents the
+relationships among the categorical variables of the data.
+
+## Conclusion:
+
+The study successfully explored dietary preferences and food consumption
+patterns using categorical data analysis. Key findings include:
+
+-   **Gender and Dietary Preferences:** Females were found to be
+    significantly less likely to prefer non- vegetarian food compared to
+    males, with both odds ratio and relative risk analyses supporting
+    this conclusion.
+
+-   **Health Consciousness and Food Choices:** A significant association
+    was found between health consciousness and preferred food type,
+    indicating that individuals who value health are more likely to
+    prefer home-cooked or organic foods.
+
+-   **Meal Preferences and Eating Out Frequency:** The likelihood ratio
+    test suggested no significant association between meal preference
+    and the frequency of eating out, indicating that these factors may
+    be independent of each other.
+
+-   **Predictive Modeling:** Logistic regression analysis identified
+    gender and favorite cuisine as significant predictors of dietary
+    preferences. The model demonstrated good accuracy in predicting
+    vegetarians but struggled with specificity in identifying
+    non-vegetarians.
+
+-   **Multinomial and Log-Linear Modeling:** The multinomial logistic
+    regression revealed strong preferences for supermarkets and organic
+    stores among frequent cooks, while the log-linear model adequately
+    represented the relationships among various categorical variables
+    related to food consumption.
+
+    Overall, the findings provide valuable insights into the factors
+    influencing dietary preferences and food consumption patterns,
+    offering potential applications in public health, marketing, and
+    consumer behavior research. The study’s methodology and statistical
+    analyses contribute to a deeper understanding of the complex
+    interactions between demographic, behavioral, and psychological
+    factors in shaping food choices.\
+
+## Further Recommendation
+
+Based on the findings of this study, several recommendations can be made
+to better address the diverse dietary preferences and food consumption
+patterns observed:
+
+-   **Targeted Health Promotion Campaigns:** Public health initiatives
+    should focus on increasing awareness about healthy food choices,
+    especially among groups that show lower health consciousness.
+    Tailored campaigns could encourage healthier eating habits,
+    particularly for individuals who prefer fast food or street food.
+
+<!-- -->
+
+-   **Supporting Sustainable Eating Practices:** Considering the growing
+    interest in health-conscious and organic food, policies that support
+    sustainable farming practices and make organic products more
+    accessible and affordable could align with consumer preferences and
+    promote overall well-being.
+
+-   **Developing Mobile Apps for Dietary Guidance:** Technology
+    companies could develop or enhance mobile apps that provide
+    personalized dietary advice based on user input regarding their food
+    preferences, health consciousness, and eating habits. This could
+    help users make informed food choices in real-time.
